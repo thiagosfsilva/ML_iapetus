@@ -1,0 +1,31 @@
+---
+title: "Intro to Machine Learning"
+author: "Thiago Silva"
+format: revealjs
+---
+
+# Introductions
+
+:::: {.columns}
+
+::: {.column width="60%"}
+contents...
+
+## Who am I?
+
+- Brazilian
+- Not the football player
+- Senior Lecturer in Environmental Informatics
+- Have been researching the Amazon wetlands for 20+ years.
+- Passionate about plant and ecosystem function and technology
+:::
+
+::: {.column width="40%"}
+contents...
+:::
+
+::::
+
+# What is Machine Learning?
+
+![]()
