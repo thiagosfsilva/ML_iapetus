@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="ML_levels.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#cccccc"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="1"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.0850589"
+     inkscape:cx="397.21345"
+     inkscape:cy="561.25984"
+     inkscape:window-width="3840"
+     inkscape:window-height="2054"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <circle
+       style="fill:#ffcc00;stroke:#1a1a1a;stroke-width:0.370417"
+       id="path1"
+       cx="105"
+       cy="106.31527"
+       r="81.199509" />
+    <circle
+       style="fill:#ffdd55;stroke:#1a1a1a;stroke-width:0.323794"
+       id="circle7"
+       cx="105"
+       cy="116.55885"
+       r="70.97924" />
+    <ellipse
+       style="fill:#ffe680;stroke:#1a1a1a;stroke-width:0.280496"
+       id="circle3"
+       cx="105"
+       cy="126.41285"
+       rx="61.830585"
+       ry="61.146889" />
+    <circle
+       style="fill:#ffeeaa;stroke:#1a1a1a;stroke-width:0.226694"
+       id="circle4"
+       cx="105"
+       cy="137.89285"
+       r="49.693783" />
+    <circle
+       style="fill:#fff6d5;stroke:#1a1a1a;stroke-width:0.177194"
+       id="circle8"
+       cx="105"
+       cy="148.76865"
+       r="38.842747" />
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:7.55586px;font-family:Arial;-inkscape-font-specification:'Arial Bold';fill:#483e37;stroke:none;stroke-width:0.566689"
+       x="78.72789"
+       y="106.07035"
+       id="text4-7-58"><tspan
+         sodipodi:role="line"
+         style="fill:#483e37;stroke:none;stroke-width:0.566689"
+         x="78.72789"
+         y="106.07035"
+         id="tspan6-6">Deep Learning</tspan><tspan
+         sodipodi:role="line"
+         style="fill:#483e37;stroke:none;stroke-width:0.566689"
+         x="78.72789"
+         y="115.51517"
+         id="tspan5-4-6" /></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:7.55586px;font-family:Arial;-inkscape-font-specification:'Arial Bold';fill:#483e37;stroke:none;stroke-width:0.566689"
+       x="80.847443"
+       y="153.04591"
+       id="text4-7-58-9"><tspan
+         sodipodi:role="line"
+         style="fill:#483e37;stroke:none;stroke-width:0.566689"
+         x="80.847443"
+         y="153.04591"
+         id="tspan6-6-9">Generative AI</tspan><tspan
+         sodipodi:role="line"
+         style="fill:#483e37;stroke:none;stroke-width:0.566689"
+         x="80.847443"
+         y="162.49074"
+         id="tspan5-4-6-9" /></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:7.55586px;font-family:Arial;-inkscape-font-specification:'Arial Bold';fill:#483e37;stroke:none;stroke-width:0.566689"
+       x="69.251244"
+       y="41.163841"
+       id="text4"><tspan
+         sodipodi:role="line"
+         id="tspan4"
+         style="fill:#483e37;stroke:none;stroke-width:0.566689"
+         x="69.251244"
+         y="41.163841">Artifical Intelligence</tspan><tspan
+         sodipodi:role="line"
+         style="fill:#483e37;stroke:none;stroke-width:0.566689"
+         x="69.251244"
+         y="50.608665"
+         id="tspan5" /></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:7.55586px;font-family:Arial;-inkscape-font-specification:'Arial Bold';fill:#483e37;stroke:none;stroke-width:0.566689"
+       x="72.856232"
+       y="62.05899"
+       id="text4-7"><tspan
+         sodipodi:role="line"
+         style="fill:#483e37;stroke:none;stroke-width:0.566689"
+         x="72.856232"
+         y="62.05899"
+         id="tspan6">Machine Learning</tspan><tspan
+         sodipodi:role="line"
+         style="fill:#483e37;stroke:none;stroke-width:0.566689"
+         x="72.856232"
+         y="71.503815"
+         id="tspan5-4" /></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:7.55586px;font-family:Arial;-inkscape-font-specification:'Arial Bold';fill:#483e37;stroke:none;stroke-width:0.566689"
+       x="75.08831"
+       y="83.01001"
+       id="text4-7-5"><tspan
+         sodipodi:role="line"
+         style="fill:#483e37;stroke:none;stroke-width:0.566689"
+         x="75.08831"
+         y="83.01001"
+         id="tspan5-4-0">Neural Networks</tspan></text>
+  </g>
+</svg>

@@ -1,0 +1,1840 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="ML_Iapetus_presentation_files/libs/clipboard/clipboard.min.js"></script>
+<script src="ML_Iapetus_presentation_files/libs/quarto-html/tabby.min.js"></script>
+<script src="ML_Iapetus_presentation_files/libs/quarto-html/popper.min.js"></script>
+<script src="ML_Iapetus_presentation_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="ML_Iapetus_presentation_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="ML_Iapetus_presentation_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="ML_Iapetus_presentation_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="ML_Iapetus_presentation_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.4.554">
+
+  <meta name="author" content="Thiago Silva">
+  <title>Intro to Machine Learning</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="ML_Iapetus_presentation_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="ML_Iapetus_presentation_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #f07178; background-color: #2a0f15; font-weight: bold; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #00e0e0; } /* Attribute */
+    code span.bn { color: #d4d0ab; } /* BaseN */
+    code span.bu { color: #abe338; } /* BuiltIn */
+    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffd700; } /* Constant */
+    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
+    code span.cv { color: #ffd700; } /* CommentVar */
+    code span.do { color: #f8f8f2; } /* Documentation */
+    code span.dt { color: #ffa07a; } /* DataType */
+    code span.dv { color: #d4d0ab; } /* DecVal */
+    code span.er { color: #f07178; text-decoration: underline; } /* Error */
+    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
+    code span.fl { color: #d4d0ab; } /* Float */
+    code span.fu { color: #ffa07a; } /* Function */
+    code span.im { color: #abe338; } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
+    code span.op { color: #ffa07a; } /* Operator */
+    code span.ot { color: #00e0e0; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
+    code span.sc { color: #abe338; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #00e0e0; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #dcc6e0; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="ML_Iapetus_presentation_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="ML_Iapetus_presentation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="ML_Iapetus_presentation_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="ML_Iapetus_presentation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="ML_Iapetus_presentation_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-dark">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Intro to Machine Learning</h1>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Thiago Silva 
+</div>
+</div>
+</div>
+
+</section>
+<section>
+<section id="introductions" class="title-slide slide level1 center">
+<h1>Introductions</h1>
+
+</section>
+<section id="who-am-i" class="slide level2">
+<h2>Who am I?</h2>
+<ul>
+<li>Brazilian</li>
+<li>Not the football player</li>
+<li>Senior Lecturer in Environmental Informatics</li>
+<li>Have been researching the Amazon wetlands for 20+ years.</li>
+<li>Passionate about plant and ecosystem function and technology</li>
+</ul>
+</section></section>
+<section>
+<section id="what-is-machine-learning" class="title-slide slide level1 center">
+<h1>What is Machine Learning?</h1>
+
+</section>
+<section id="is-ml-just-statistics" class="slide level2 center">
+<h2>Is ML just statistics?</h2>
+
+<img data-src="images/stats_ML_AI.png" class="r-stretch"></section>
+<section id="is-ml-just-statistics-1" class="slide level2">
+<h2>Is ML just statistics?</h2>
+<p>What do we use statistics for?</p>
+<div>
+<ul>
+<li class="fragment">Exploration</li>
+<li class="fragment">Confirmation</li>
+<li class="fragment">Prediction</li>
+</ul>
+</div>
+</section>
+<section id="is-ml-just-statistics-2" class="slide level2">
+<h2>Is ML just statistics?</h2>
+<p>What do we use statistics for?</p>
+<ul>
+<li>Exploration</li>
+<li>Confirmation</li>
+<li><strong>Prediction</strong></li>
+</ul>
+</section>
+<section id="section" class="slide level2 center">
+<h2></h2>
+<div class="r-fit-text">
+<p><em>Confidence</em> vs.&nbsp;<em>Accuracy</em></p>
+</div>
+</section>
+<section id="is-this-a-good-model" class="slide level2">
+<h2>Is this a good model?</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y ~ x, data = df)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-377.94  -66.26   -4.97   66.86  281.84 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept)    5.229      6.277   0.833  0.40501   
+x              0.341      0.111   3.071  0.00219 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 100.4 on 998 degrees of freedom
+Multiple R-squared:  0.009364,  Adjusted R-squared:  0.008372 
+F-statistic: 9.434 on 1 and 998 DF,  p-value: 0.002188</code></pre>
+</div>
+</div>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+
+<img data-src="ML_Iapetus_presentation_files/figure-revealjs/plot%20goodbadmodel-1.png" width="960" class="r-stretch"></section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+
+<img data-src="ML_Iapetus_presentation_files/figure-revealjs/obsvspred-1.png" width="960" class="r-stretch"></section>
+<section id="machine-learning-vs.-statistics" class="slide level2">
+<h2>Machine Learning vs.&nbsp;Statistics</h2>
+<ul>
+<li>It’s all about good predictions</li>
+<li>Forget p-values, confidence intervals, model assumptions</li>
+<li>Forget (mostly) about <strong>model interpretation</strong></li>
+<li>Forget about the ‘minimal’ model and parsimony - use ALL the data</li>
+<li>The best ML methods don’t care about linearity, normality, collinearity, etc.</li>
+<li>Many good statistical methods (e.g.&nbsp;linear models) are bad ML approaches</li>
+</ul>
+</section>
+<section id="example-boston-housing-price" class="slide level2">
+<h2>Example: Boston Housing Price</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   506 obs. of  14 variables:
+ $ crim   : num  0.00632 0.02731 0.02729 0.03237 0.06905 ...
+ $ zn     : num  18 0 0 0 0 0 12.5 12.5 12.5 12.5 ...
+ $ indus  : num  2.31 7.07 7.07 2.18 2.18 2.18 7.87 7.87 7.87 7.87 ...
+ $ chas   : int  0 0 0 0 0 0 0 0 0 0 ...
+ $ nox    : num  0.538 0.469 0.469 0.458 0.458 0.458 0.524 0.524 0.524 0.524 ...
+ $ rm     : num  6.58 6.42 7.18 7 7.15 ...
+ $ age    : num  65.2 78.9 61.1 45.8 54.2 58.7 66.6 96.1 100 85.9 ...
+ $ dis    : num  4.09 4.97 4.97 6.06 6.06 ...
+ $ rad    : int  1 2 2 3 3 3 5 5 5 5 ...
+ $ tax    : num  296 242 242 222 222 222 311 311 311 311 ...
+ $ ptratio: num  15.3 17.8 17.8 18.7 18.7 18.7 15.2 15.2 15.2 15.2 ...
+ $ black  : num  397 397 393 395 397 ...
+ $ lstat  : num  4.98 9.14 4.03 2.94 5.33 ...
+ $ medv   : num  24 21.6 34.7 33.4 36.2 28.7 22.9 27.1 16.5 18.9 ...</code></pre>
+</div>
+</div>
+</section>
+<section id="linear-regression-vs-random-forests" class="slide level2">
+<h2>Linear Regression vs Random Forests</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  model .metric .estimator .estimate
+  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+1 OLS   rmse    standard        6.03
+2 RF    rmse    standard        3.15</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="ml-concepts" class="title-slide slide level1 center">
+<h1>ML Concepts</h1>
+
+</section>
+<section id="terminology" class="slide level2">
+<h2>Terminology</h2>
+
+<img data-src="images/ML_levels.svg" class="r-stretch"></section>
+<section id="terminology-1" class="slide level2">
+<h2>Terminology</h2>
+<ul>
+<li><strong>Training:</strong> calculating model parameters from data.</li>
+<li><strong>Tuning:</strong> optimizing model <em>hyperparameters</em> for best prediction.</li>
+<li><strong>Validating:</strong> evaluation while tuning.</li>
+<li><strong>Testing:</strong> final evaluation of the resulting model.</li>
+<li><strong>Outcome:</strong> our dependent variable</li>
+<li><strong>Feature:</strong> our predictor variables</li>
+</ul>
+</section>
+<section id="terminology-2" class="slide level2">
+<h2>Terminology</h2>
+<ul>
+<li><strong>Classification:</strong> any problem/model that outputs <em>categorical</em> data.
+<ul>
+<li>In ML, logistic <em>regression</em> is a *classification** algorithm</li>
+</ul></li>
+<li><strong>Regression:</strong> any problem/model that outputs <em>continuous</em> data</li>
+</ul>
+<p>When dealing with images:</p>
+
+<img data-src="images/segvsclasvsdecjpg.jpg" class="r-stretch"></section></section>
+<section>
+<section id="machine-learning-resources" class="title-slide slide level1 center">
+<h1>Machine Learning resources</h1>
+
+</section>
+<section id="what-programming-language" class="slide level2">
+<h2>What programming language?</h2>
+<p><strong>R:</strong></p>
+<ul>
+<li>A ‘smaller’, more domain specific language (21,686 pkgs on CRAN).</li>
+<li>You probably already know it.</li>
+<li>Very good for statistical data analysis too.</li>
+<li>Not very good to learn good programming habits and concepts.</li>
+<li>Easier to install, set up and get going.</li>
+</ul>
+<p><strong>Python:</strong></p>
+<ul>
+<li>A much ‘bigger’, general purpose language (530,000 pkgs on PIP).</li>
+<li>Not too different from R, but will fill ‘clunky’ at first.</li>
+<li>Will teach you more about good programming habits and concepts.</li>
+<li><em>The</em> language used by the people <em>developing</em> ML.</li>
+<li>Good for many other uses.</li>
+</ul>
+</section>
+<section id="machine-learning-resources-1" class="slide level2">
+<h2>Machine Learning Resources</h2>
+<p><strong>R:</strong></p>
+<ul>
+<li><code>caret</code>: named from the estimation symbol (<span class="math inline">\(\hat{}\)</span>), the ‘old school’</li>
+<li><code>tidymodels</code>: the ‘tidyverse’ way, actively developed</li>
+</ul>
+<p><strong>Python:</strong></p>
+<ul>
+<li><code>scikit-learn</code>: the “holy grail” of ML</li>
+<li><code>pytorch</code> and <code>tensorflow</code>: the “big two” for deep learning</li>
+</ul>
+</section>
+<section id="machine-learning-resources-2" class="slide level2">
+<h2>Machine Learning Resources</h2>
+<p>Where to start?</p>
+<ul>
+<li>The <code>tidymodels</code> <a href="https://www.tidymodels.org/">website</a> and the ‘Tidy Models with R’ <a href="https://www.tmwr.org/">e-book</a>.</li>
+<li>The older <code>Applied Predictive Modeling</code> <a href="https://link.springer.com/book/10.1007/978-1-4614-6849-3">book</a> is still better for <em>understanding</em> ML</li>
+<li>The <a href="https://scikit-learn.org/stable/">Scikit-learn website</a> is excellent for learning about specific algorithms, regardless of programming language.</li>
+</ul>
+</section></section>
+<section>
+<section id="ml-by-example" class="title-slide slide level1 center">
+<h1>ML by example</h1>
+
+</section>
+<section id="getting-ready" class="slide level2">
+<h2>Getting ready</h2>
+<p>For this session, install the following packages:</p>
+<p><code>tidyverse</code>,<code>tidymodels</code>, <code>modeldata</code>, <code>glmnet</code>, <code>parallel</code>, <code>ranger</code>, <code>vip</code></p>
+<p>I am assuming you are using R version 4.4.2.</p>
+</section>
+<section id="basic-regression-in-tidymodels" class="slide level2">
+<h2>Basic regression in <code>tidymodels</code></h2>
+<p>The sea urchins dataset explores how three different feeding regimes affect the size of sea urchins over time. We wand to predict suture <code>width</code> from <code>initial_volume</code> (continuous) and <code>food_regime</code> (categoricaL).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb4-2"><a href=""></a><span class="fu">library</span>(tidymodels)</span>
+<span id="cb4-3"><a href=""></a></span>
+<span id="cb4-4"><a href=""></a>urchins <span class="ot">&lt;-</span> </span>
+<span id="cb4-5"><a href=""></a>  <span class="fu">read_csv</span>(<span class="st">"https://tidymodels.org/start/models/urchins.csv"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-6"><a href=""></a>  <span class="fu">setNames</span>(<span class="fu">c</span>(<span class="st">"food_regime"</span>, <span class="st">"initial_volume"</span>, <span class="st">"width"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-7"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">food_regime =</span> <span class="fu">factor</span>(food_regime, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Initial"</span>, <span class="st">"Low"</span>, <span class="st">"High"</span>)))</span>
+<span id="cb4-8"><a href=""></a></span>
+<span id="cb4-9"><a href=""></a><span class="fu">glimpse</span>(urchins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 72
+Columns: 3
+$ food_regime    &lt;fct&gt; Initial, Initial, Initial, Initial, Initial, Initial, I…
+$ initial_volume &lt;dbl&gt; 3.5, 5.0, 8.0, 10.0, 13.0, 13.0, 15.0, 15.0, 16.0, 17.0…
+$ width          &lt;dbl&gt; 0.010, 0.020, 0.061, 0.051, 0.041, 0.061, 0.041, 0.071,…</code></pre>
+</div>
+</div>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="fu">ggplot</span>(urchins,<span class="fu">aes</span>(initial_volume, width, <span class="at">colour =</span> food_regime)) <span class="sc">+</span> </span>
+<span id="cb6-2"><a href=""></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb6-3"><a href=""></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="ML_Iapetus_presentation_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"></section>
+<section id="the-traditional-way" class="slide level2">
+<h2>The traditional way</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(width <span class="sc">~</span> initial_volume <span class="sc">*</span> food_regime, <span class="at">data =</span> urchins)</span>
+<span id="cb7-2"><a href=""></a><span class="fu">summary</span> (mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = width ~ initial_volume * food_regime, data = urchins)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.045133 -0.013639  0.001111  0.013226  0.067907 
+
+Coefficients:
+                                 Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                     0.0331216  0.0096186   3.443 0.001002 ** 
+initial_volume                  0.0015546  0.0003978   3.908 0.000222 ***
+food_regimeLow                  0.0197824  0.0129883   1.523 0.132514    
+food_regimeHigh                 0.0214111  0.0145318   1.473 0.145397    
+initial_volume:food_regimeLow  -0.0012594  0.0005102  -2.469 0.016164 *  
+initial_volume:food_regimeHigh  0.0005254  0.0007020   0.748 0.456836    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.02115 on 66 degrees of freedom
+Multiple R-squared:  0.4622,    Adjusted R-squared:  0.4215 
+F-statistic: 11.35 on 5 and 66 DF,  p-value: 6.424e-08</code></pre>
+</div>
+</div>
+</section>
+<section id="the-mltidymodels-way" class="slide level2">
+<h2>The ML/Tidymodels way</h2>
+<ol type="1">
+<li><p>We most likely want to try different <em>algorithms</em>, so we want a unified interface for trying them. This is given the by <code>parnsip</code> package.</p>
+<ul>
+<li>For a linear model, we have <code>linear_reg()</code></li>
+</ul></li>
+<li><p>Different algorithms may have use differen <em>engines</em> (estimation methods/implementations/packages)</p>
+<ul>
+<li>Some available engines for <code>linear_reg()</code> are <code>lm</code>, <code>glm</code>,<code>gls</code>,<code>lme</code>, etc…</li>
+</ul></li>
+<li><p>Then we want to <em>fit</em> (i.e.&nbsp;train) the model</p>
+<ul>
+<li><code>parsnip</code> gives us the <code>fit()</code> function</li>
+</ul></li>
+</ol>
+</section>
+<section id="section-4" class="slide level2">
+<h2></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="co"># Set up the model type and engine</span></span>
+<span id="cb9-2"><a href=""></a>lin_mod <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span> <span class="fu">set_engine</span> (<span class="st">'glm'</span>)</span>
+<span id="cb9-3"><a href=""></a></span>
+<span id="cb9-4"><a href=""></a><span class="co"># Fit the model </span></span>
+<span id="cb9-5"><a href=""></a>lin_fit <span class="ot">&lt;-</span> lin_mod <span class="sc">%&gt;%</span> <span class="fu">fit</span>(width <span class="sc">~</span> initial_volume <span class="sc">*</span> food_regime,</span>
+<span id="cb9-6"><a href=""></a>                           <span class="at">data =</span> urchins,</span>
+<span id="cb9-7"><a href=""></a>                           <span class="at">family=</span><span class="st">'gaussian'</span>)</span>
+<span id="cb9-8"><a href=""></a></span>
+<span id="cb9-9"><a href=""></a><span class="co"># From the broom pkg</span></span>
+<span id="cb9-10"><a href=""></a><span class="fu">tidy</span>(lin_fit) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+  term                            estimate std.error statistic  p.value
+  &lt;chr&gt;                              &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)                     0.0331    0.00962      3.44  0.00100 
+2 initial_volume                  0.00155   0.000398     3.91  0.000222
+3 food_regimeLow                  0.0198    0.0130       1.52  0.133   
+4 food_regimeHigh                 0.0214    0.0145       1.47  0.145   
+5 initial_volume:food_regimeLow  -0.00126   0.000510    -2.47  0.0162  
+6 initial_volume:food_regimeHigh  0.000525  0.000702     0.748 0.457   </code></pre>
+</div>
+</div>
+</section>
+<section id="ml-workflow" class="slide level2">
+<h2>ML Workflow</h2>
+<p>The ML workflow involves more steps than the usual statistical analysis:</p>
+
+<img data-src="images/data-preparation-workflow.png" class="r-stretch"></section>
+<section id="ml-by-example-hotel-bookings" class="slide level2">
+<h2>ML by example: Hotel Bookings</h2>
+<p>Let’s use hotel bookings data to predict which hotel stays included children and/or babies, based on characteristics such as which hotel the guests stay at, how much they pay, etc.</p>
+</section>
+<section id="reading-in-the-data" class="slide level2">
+<h2>Reading in the data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a>hotels <span class="ot">&lt;-</span> </span>
+<span id="cb11-2"><a href=""></a>  <span class="fu">read_csv</span>(<span class="st">"https://tidymodels.org/start/case-study/hotels.csv"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href=""></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), as.factor))</span>
+<span id="cb11-4"><a href=""></a></span>
+<span id="cb11-5"><a href=""></a><span class="fu">glimpse</span>(hotels)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 50,000
+Columns: 23
+$ hotel                          &lt;fct&gt; City_Hotel, City_Hotel, Resort_Hotel, R…
+$ lead_time                      &lt;dbl&gt; 217, 2, 95, 143, 136, 67, 47, 56, 80, 6…
+$ stays_in_weekend_nights        &lt;dbl&gt; 1, 0, 2, 2, 1, 2, 0, 0, 0, 2, 1, 0, 1, …
+$ stays_in_week_nights           &lt;dbl&gt; 3, 1, 5, 6, 4, 2, 2, 3, 4, 2, 2, 1, 2, …
+$ adults                         &lt;dbl&gt; 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 1, 2, …
+$ children                       &lt;fct&gt; none, none, none, none, none, none, chi…
+$ meal                           &lt;fct&gt; BB, BB, BB, HB, HB, SC, BB, BB, BB, BB,…
+$ country                        &lt;fct&gt; DEU, PRT, GBR, ROU, PRT, GBR, ESP, ESP,…
+$ market_segment                 &lt;fct&gt; Offline_TA/TO, Direct, Online_TA, Onlin…
+$ distribution_channel           &lt;fct&gt; TA/TO, Direct, TA/TO, TA/TO, Direct, TA…
+$ is_repeated_guest              &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+$ previous_cancellations         &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+$ previous_bookings_not_canceled &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+$ reserved_room_type             &lt;fct&gt; A, D, A, A, F, A, C, B, D, A, A, D, A, …
+$ assigned_room_type             &lt;fct&gt; A, K, A, A, F, A, C, A, D, A, D, D, A, …
+$ booking_changes                &lt;dbl&gt; 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+$ deposit_type                   &lt;fct&gt; No_Deposit, No_Deposit, No_Deposit, No_…
+$ days_in_waiting_list           &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+$ customer_type                  &lt;fct&gt; Transient-Party, Transient, Transient, …
+$ average_daily_rate             &lt;dbl&gt; 80.75, 170.00, 8.00, 81.00, 157.60, 49.…
+$ required_car_parking_spaces    &lt;fct&gt; none, none, none, none, none, none, non…
+$ total_of_special_requests      &lt;dbl&gt; 1, 3, 2, 1, 4, 1, 1, 1, 1, 1, 0, 1, 0, …
+$ arrival_date                   &lt;date&gt; 2016-09-01, 2017-08-25, 2016-11-19, 20…</code></pre>
+</div>
+</div>
+</section>
+<section id="data-exploration" class="slide level2">
+<h2>Data exploration</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="co"># Do we have missing data?</span></span>
+<span id="cb13-2"><a href=""></a>hotels <span class="sc">%&gt;%</span> <span class="fu">tally</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+      n
+  &lt;int&gt;
+1 50000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a>hotels <span class="sc">%&gt;%</span> <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span> <span class="fu">tally</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+      n
+  &lt;int&gt;
+1 50000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a><span class="co"># What does the outcome variable look like?</span></span>
+<span id="cb17-2"><a href=""></a>hotels <span class="sc">%&gt;%</span> </span>
+<span id="cb17-3"><a href=""></a>  <span class="fu">count</span>(children) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-4"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">prop =</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  children     n   prop
+  &lt;fct&gt;    &lt;int&gt;  &lt;dbl&gt;
+1 children  4038 0.0808
+2 none     45962 0.919 </code></pre>
+</div>
+</div>
+</section>
+<section id="data-exploration-1" class="slide level2">
+<h2>Data exploration</h2>
+<p><strong>Problem - Class imbalance:</strong> severe class imbalance can bias model results.</p>
+<p><em>Possible Solutions:</em> upsample or downsample data.</p>
+</section>
+<section id="data-splitting" class="slide level2">
+<h2>Data splitting</h2>
+<p>One of the fundamental concepts in ML is that we <strong>ALWAYS</strong> split our data into <em>training</em> and <em>testing</em>.</p>
+<ul>
+<li>We want the largest possible number of observations to train</li>
+<li>We want enough samples to test with robustness</li>
+</ul>
+<p>Usually data splits are between 70/30 to 90/10, with 80/20 being most common</p>
+</section>
+<section id="how-do-we-split" class="slide level2">
+<h2>How do we split?</h2>
+<ul>
+<li>We want it to be random</li>
+<li>But we may want to account for <em>structures</em> in the data
+<ul>
+<li>Geographical data</li>
+<li>Grouped data</li>
+<li>Imbalanced data</li>
+</ul></li>
+</ul>
+<p>The <code>rsample</code> package from <code>tidymodels</code> deals with sampling</p>
+</section>
+<section id="splitting-our-data-7525" class="slide level2">
+<h2>Splitting our data 75/25</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">45</span>)</span>
+<span id="cb19-2"><a href=""></a></span>
+<span id="cb19-3"><a href=""></a><span class="co"># Stratified sampling by the children variable to keep proportions</span></span>
+<span id="cb19-4"><a href=""></a>data_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(hotels, <span class="at">prop =</span> <span class="dv">3</span><span class="sc">/</span><span class="dv">4</span>, <span class="at">strata =</span> children)</span>
+<span id="cb19-5"><a href=""></a></span>
+<span id="cb19-6"><a href=""></a>hotel_train <span class="ot">&lt;-</span> <span class="fu">training</span>(data_split)</span>
+<span id="cb19-7"><a href=""></a>hotel_test <span class="ot">&lt;-</span> <span class="fu">testing</span>(data_split)</span>
+<span id="cb19-8"><a href=""></a></span>
+<span id="cb19-9"><a href=""></a><span class="fu">print</span>(<span class="fu">c</span>(<span class="fu">nrow</span>(hotels),<span class="fu">nrow</span>(hotel_train),<span class="fu">nrow</span>(hotel_test)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 50000 37500 12500</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a>hotel_train <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2"><a href=""></a>  <span class="fu">count</span>(children) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-3"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">prop =</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  children     n   prop
+  &lt;fct&gt;    &lt;int&gt;  &lt;dbl&gt;
+1 children  2995 0.0799
+2 none     34505 0.920 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a>hotel_test <span class="sc">%&gt;%</span> </span>
+<span id="cb23-2"><a href=""></a>  <span class="fu">count</span>(children) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-3"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">prop =</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  children     n   prop
+  &lt;fct&gt;    &lt;int&gt;  &lt;dbl&gt;
+1 children  1043 0.0834
+2 none     11457 0.917 </code></pre>
+</div>
+</div>
+</section>
+<section id="feature-preprocessing-and-engineering" class="slide level2">
+<h2>Feature preprocessing and engineering</h2>
+<ul>
+<li>Changing variables to fit algorithms (e.g.&nbsp;dummy variables)</li>
+<li>Normalizing (scaling and centering) always recommended</li>
+<li>Transforming variables</li>
+<li>Combining/Splitting Variables</li>
+</ul>
+<p>The <code>recipes</code> package lets us organise these as a reusable ‘recipes’. The <code>step_</code> functions have several common preprocessing steps implemented.</p>
+</section>
+<section id="section-5" class="slide level2">
+<h2></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a>holidays <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"AllSouls"</span>, <span class="st">"AshWednesday"</span>, <span class="st">"ChristmasEve"</span>, <span class="st">"Easter"</span>, </span>
+<span id="cb25-2"><a href=""></a>              <span class="st">"ChristmasDay"</span>, <span class="st">"GoodFriday"</span>, <span class="st">"NewYearsDay"</span>, <span class="st">"PalmSunday"</span>)</span>
+<span id="cb25-3"><a href=""></a></span>
+<span id="cb25-4"><a href=""></a>lr_recipe <span class="ot">&lt;-</span> </span>
+<span id="cb25-5"><a href=""></a>  <span class="fu">recipe</span>(children <span class="sc">~</span> ., <span class="at">data =</span> hotel_train) <span class="sc">%&gt;%</span> <span class="co"># model firmula</span></span>
+<span id="cb25-6"><a href=""></a>  <span class="fu">step_date</span>(arrival_date) <span class="sc">%&gt;%</span> <span class="co"># splits dates into y, m, d</span></span>
+<span id="cb25-7"><a href=""></a>  <span class="fu">step_holiday</span>(arrival_date, <span class="at">holidays =</span> holidays) <span class="sc">%&gt;%</span> <span class="co"># holiday dummy vars</span></span>
+<span id="cb25-8"><a href=""></a>  <span class="fu">step_rm</span>(arrival_date) <span class="sc">%&gt;%</span> <span class="co"># remove variables</span></span>
+<span id="cb25-9"><a href=""></a>  <span class="fu">step_dummy</span>(<span class="fu">all_nominal_predictors</span>()) <span class="sc">%&gt;%</span>  <span class="co"># encodes chr or fct to dummies</span></span>
+<span id="cb25-10"><a href=""></a>  <span class="fu">step_zv</span>(<span class="fu">all_predictors</span>()) <span class="sc">%&gt;%</span> <span class="co"># remove variables with zero variance</span></span>
+<span id="cb25-11"><a href=""></a>  <span class="fu">step_normalize</span>(<span class="fu">all_predictors</span>()) <span class="co"># centers and scales</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="picking-an-algorithm" class="slide level2">
+<h2>Picking an algorithm</h2>
+<p>We have a binary outcome (<em>classification</em> problem), so logistic regression might work?</p>
+<ul>
+<li>Penalised Logistic Regression from <code>glmnet</code> package</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a><span class="co"># Set up the model</span></span>
+<span id="cb26-2"><a href=""></a><span class="co"># tune() indicates this parameters should be tuned</span></span>
+<span id="cb26-3"><a href=""></a>lr_mod <span class="ot">&lt;-</span> </span>
+<span id="cb26-4"><a href=""></a>  <span class="fu">logistic_reg</span>(<span class="at">penalty =</span> <span class="fu">tune</span>(), <span class="at">mixture =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-5"><a href=""></a>  <span class="fu">set_engine</span>(<span class="st">"glmnet"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="creating-a-workflow" class="slide level2">
+<h2>Creating a workflow</h2>
+<p>The <code>workflow</code> package is used to tie in the different modeling steps</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href=""></a>lr_workflow <span class="ot">&lt;-</span> </span>
+<span id="cb27-2"><a href=""></a>  <span class="fu">workflow</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb27-3"><a href=""></a>  <span class="fu">add_model</span>(lr_mod) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-4"><a href=""></a>  <span class="fu">add_recipe</span>(lr_recipe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="model-tuning" class="slide level2">
+<h2>Model tuning</h2>
+<ul>
+<li><p>Most ML algorithms will have <em>hyperparameters</em>: parameters that are not learned from data, but that will change the outcome of the modelling</p></li>
+<li><p>Stepwise regression is a crude example of hyperparameter tuning (‘nvar’ would be the hyperparameter)</p></li>
+<li><p>Since they can be <em>learned</em>, they must be <em>tuned</em></p></li>
+<li><p>To tune a hyperparameter we set a range of values/combinations, then <em>validate</em> each combination</p></li>
+</ul>
+</section>
+<section id="validation-sets-and-strategies" class="slide level2">
+<h2>Validation sets and strategies</h2>
+<ul>
+<li>To validate, we must split our data <em>again</em>!</li>
+<li>Different validation strategies:
+<ul>
+<li>Single validation split</li>
+<li><em>k-fold</em> or <em>v-fold</em> cross-validation</li>
+<li>Leave-one-out cross-validation (LOOCV)</li>
+</ul></li>
+</ul>
+</section>
+<section id="cross-validation" class="slide level2">
+<h2>Cross-validation</h2>
+<p><img data-src="images/5-fold-cross-validation_SIMPLE-EXAMPLE_v2.png"><br>
+##</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a><span class="co"># Create three folds</span></span>
+<span id="cb28-2"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">234</span>)</span>
+<span id="cb28-3"><a href=""></a>hotel_folds <span class="ot">&lt;-</span> <span class="fu">vfold_cv</span>(hotel_train,<span class="at">v=</span><span class="dv">3</span>,<span class="at">strata=</span> children)</span>
+<span id="cb28-4"><a href=""></a></span>
+<span id="cb28-5"><a href=""></a>hotel_folds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#  3-fold cross-validation using stratification 
+# A tibble: 3 × 2
+  splits                id   
+  &lt;list&gt;                &lt;chr&gt;
+1 &lt;split [25000/12500]&gt; Fold1
+2 &lt;split [25000/12500]&gt; Fold2
+3 &lt;split [25000/12500]&gt; Fold3</code></pre>
+</div>
+</div>
+</section>
+<section id="the-tuning-grid" class="slide level2">
+<h2>The tuning grid</h2>
+<ul>
+<li>We want to test a range of values for each hyperparameter</li>
+<li>We want to test all possible combinations for multiple hyperparameters</li>
+<li>Numbers can can <em>explode</em> very fast</li>
+</ul>
+<p>The <code>dials</code> package of <code>tidymodels</code> will deal with setting tuning parameters</p>
+</section>
+<section id="section-6" class="slide level2">
+<h2></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a><span class="co"># Create a regular sequence for the penalty parameter</span></span>
+<span id="cb30-2"><a href=""></a>lr_reg_grid <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">penalty =</span> <span class="dv">10</span><span class="sc">^</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">30</span>))</span>
+<span id="cb30-3"><a href=""></a><span class="fu">nrow</span>(lr_reg_grid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 30</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a><span class="fu">head</span>(lr_reg_grid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 1
+   penalty
+     &lt;dbl&gt;
+1 0.0001  
+2 0.000127
+3 0.000161
+4 0.000204
+5 0.000259
+6 0.000329</code></pre>
+</div>
+</div>
+</section>
+<section id="how-good-is-my-model" class="slide level2">
+<h2>How good is my model?</h2>
+<p>Tuning (and testing) will always rely on some measure of model <em>performance</em>:how well does the model do? That mainly involes <em>accuracy</em>, but also other apsects such as bias.</p>
+<p>There are several accuracy <em>metrics</em> for both classification and regression <em>performance</em>:</p>
+<ul>
+<li><p><strong>Classification accuracy metrics:</strong> global accuracy, kappa, recall, precision, sensitivity, specificity, AUC, etc.</p></li>
+<li><p><strong>Regression metrics:</strong> RMSE, R-squared, MAE, etc.</p></li>
+</ul>
+<p>The <code>yardstick</code> package of <code>tidymodels</code> deals with measuring model performance.</p>
+</section>
+<section id="time-to-crunch-some-data" class="slide level2">
+<h2>Time to crunch some data!</h2>
+<p>We can now train and tune our model! The <code>tune</code> package handles that.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href=""></a>lr_res <span class="ot">&lt;-</span> </span>
+<span id="cb34-2"><a href=""></a>  lr_workflow <span class="sc">%&gt;%</span> </span>
+<span id="cb34-3"><a href=""></a>  <span class="fu">tune_grid</span>(<span class="at">resamples =</span> hotel_folds, <span class="co"># validation data</span></span>
+<span id="cb34-4"><a href=""></a>            <span class="at">grid =</span> lr_reg_grid,<span class="co"># hyperparameter values</span></span>
+<span id="cb34-5"><a href=""></a>            <span class="at">control =</span> <span class="fu">control_grid</span>(<span class="at">save_pred =</span> <span class="cn">TRUE</span>), <span class="co"># save the cval results</span></span>
+<span id="cb34-6"><a href=""></a>            <span class="at">metrics =</span> <span class="fu">metric_set</span>(roc_auc)) <span class="co"># which performance metric to use</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="did-it-work" class="slide level2">
+<h2>Did it work?</h2>
+<p>Checking the tuning results.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a>lr_perf <span class="ot">&lt;-</span> lr_res <span class="sc">%&gt;%</span> <span class="fu">collect_metrics</span>() </span>
+<span id="cb35-2"><a href=""></a></span>
+<span id="cb35-3"><a href=""></a>lr_perf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 30 × 7
+    penalty .metric .estimator  mean     n std_err .config              
+      &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;                
+ 1 0.0001   roc_auc binary     0.869     3 0.00678 Preprocessor1_Model01
+ 2 0.000127 roc_auc binary     0.870     3 0.00683 Preprocessor1_Model02
+ 3 0.000161 roc_auc binary     0.870     3 0.00685 Preprocessor1_Model03
+ 4 0.000204 roc_auc binary     0.871     3 0.00686 Preprocessor1_Model04
+ 5 0.000259 roc_auc binary     0.871     3 0.00686 Preprocessor1_Model05
+ 6 0.000329 roc_auc binary     0.872     3 0.00685 Preprocessor1_Model06
+ 7 0.000418 roc_auc binary     0.872     3 0.00683 Preprocessor1_Model07
+ 8 0.000530 roc_auc binary     0.873     3 0.00679 Preprocessor1_Model08
+ 9 0.000672 roc_auc binary     0.873     3 0.00681 Preprocessor1_Model09
+10 0.000853 roc_auc binary     0.873     3 0.00686 Preprocessor1_Model10
+# ℹ 20 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="visualising-tuning-results" class="slide level2">
+<h2>Visualising tuning results</h2>
+<p>Important: AUC=0.5 is a completely random prediction.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href=""></a>lr_perf <span class="sc">%&gt;%</span> </span>
+<span id="cb37-2"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> penalty, <span class="at">y =</span> mean)) <span class="sc">+</span> </span>
+<span id="cb37-3"><a href=""></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb37-4"><a href=""></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb37-5"><a href=""></a>  <span class="fu">ylab</span>(<span class="st">"Area under the ROC Curve"</span>) <span class="sc">+</span></span>
+<span id="cb37-6"><a href=""></a>  <span class="fu">scale_x_log10</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_number</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="ML_Iapetus_presentation_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section>
+<section id="what-would-be-the-best-parameters" class="slide level2">
+<h2>What would be the best parameters?</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href=""></a>top_models <span class="ot">&lt;-</span></span>
+<span id="cb38-2"><a href=""></a>  lr_res <span class="sc">%&gt;%</span> </span>
+<span id="cb38-3"><a href=""></a>  <span class="fu">show_best</span>(<span class="at">metric =</span> <span class="st">"roc_auc"</span>, <span class="at">n =</span> <span class="dv">15</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb38-4"><a href=""></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(mean)) </span>
+<span id="cb38-5"><a href=""></a>top_models</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 15 × 7
+    penalty .metric .estimator  mean     n std_err .config              
+      &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;                
+ 1 0.00108  roc_auc binary     0.874     3 0.00698 Preprocessor1_Model11
+ 2 0.00137  roc_auc binary     0.874     3 0.00707 Preprocessor1_Model12
+ 3 0.000853 roc_auc binary     0.873     3 0.00686 Preprocessor1_Model10
+ 4 0.00174  roc_auc binary     0.873     3 0.00708 Preprocessor1_Model13
+ 5 0.000672 roc_auc binary     0.873     3 0.00681 Preprocessor1_Model09
+ 6 0.000530 roc_auc binary     0.873     3 0.00679 Preprocessor1_Model08
+ 7 0.000418 roc_auc binary     0.872     3 0.00683 Preprocessor1_Model07
+ 8 0.00221  roc_auc binary     0.872     3 0.00710 Preprocessor1_Model14
+ 9 0.000329 roc_auc binary     0.872     3 0.00685 Preprocessor1_Model06
+10 0.000259 roc_auc binary     0.871     3 0.00686 Preprocessor1_Model05
+11 0.000204 roc_auc binary     0.871     3 0.00686 Preprocessor1_Model04
+12 0.00281  roc_auc binary     0.871     3 0.00699 Preprocessor1_Model15
+13 0.000161 roc_auc binary     0.870     3 0.00685 Preprocessor1_Model03
+14 0.000127 roc_auc binary     0.870     3 0.00683 Preprocessor1_Model02
+15 0.0001   roc_auc binary     0.869     3 0.00678 Preprocessor1_Model01</code></pre>
+</div>
+</div>
+</section>
+<section id="so-which-is-best" class="slide level2">
+<h2>So which is best?</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href=""></a>lr_best <span class="ot">&lt;-</span> lr_res <span class="sc">%&gt;%</span> <span class="fu">select_best</span>(<span class="at">metric =</span> <span class="st">'roc_auc'</span>)</span>
+<span id="cb40-2"><a href=""></a></span>
+<span id="cb40-3"><a href=""></a>lr_best</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  penalty .config              
+    &lt;dbl&gt; &lt;chr&gt;                
+1 0.00108 Preprocessor1_Model11</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href=""></a>lr_auc <span class="ot">&lt;-</span> </span>
+<span id="cb42-2"><a href=""></a>  lr_res <span class="sc">%&gt;%</span> </span>
+<span id="cb42-3"><a href=""></a>  <span class="fu">collect_predictions</span>(<span class="at">parameters =</span> lr_best) <span class="sc">%&gt;%</span> </span>
+<span id="cb42-4"><a href=""></a>  <span class="fu">roc_curve</span>(children, .pred_children) <span class="sc">%&gt;%</span> </span>
+<span id="cb42-5"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">model =</span> <span class="st">"Logistic Regression"</span>)</span>
+<span id="cb42-6"><a href=""></a></span>
+<span id="cb42-7"><a href=""></a><span class="fu">autoplot</span>(lr_auc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="ML_Iapetus_presentation_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section>
+<section id="what-about-a-second-algorithm" class="slide level2">
+<h2>What about a second algorithm?</h2>
+<p>We often want to test multiple ML algorithms to find the best performing one.</p>
+<p>Let us try the famous <em>random Forests</em> algorithm.</p>
+</section>
+<section id="decision-trees" class="slide level2">
+<h2>Decision Trees</h2>
+<p>A very simple but powerful classification/regression method</p>
+<ul>
+<li>Take one feature</li>
+<li>Find the feature value that best splits the data into the desired classes</li>
+<li>Repeat for all features</li>
+<li>Pick the best fetaure and split value</li>
+<li>Repeat recursively until all classes are isolated</li>
+</ul>
+</section>
+<section id="decision-trees-1" class="slide level2">
+<h2>Decision Trees</h2>
+
+<img data-src="images/Buying-a-Car.png" class="r-stretch"></section>
+<section id="but" class="slide level2">
+<h2>But…</h2>
+<ul>
+<li><p>Could there be multiple ‘best’ solutions?</p></li>
+<li><p>Enter the Random Forests algorithm</p></li>
+</ul>
+</section>
+<section id="why-random" class="slide level2">
+<h2>Why <em>Random</em>?</h2>
+<ul>
+<li>For each node, randomly pick a subset of the available features to learn from</li>
+<li>This tree will be a <em>weak</em> learner</li>
+</ul>
+<p>This is the <em>mtry</em> hyperparameter</p>
+</section>
+<section id="why-forests" class="slide level2">
+<h2>Why <em>Forests</em>?</h2>
+<ul>
+<li>What if we create <em>many</em> trees (a forest)</li>
+<li>Due to randomness, each tree will; be different</li>
+</ul>
+<p>This is the <em>ntree</em> hyperparameter</p>
+
+<img data-src="images/rf.png" class="r-stretch"></section>
+<section id="and-then-what" class="slide level2">
+<h2>And then what?</h2>
+<ul>
+<li>Combine the predictions of all weak trees to generate a <em>strong</em> consensus</li>
+<li>This know as an <em>ensemble learning</em> method</li>
+<li>How do we reach the consensus?</li>
+<li>Bagging or Boosting</li>
+</ul>
+</section>
+<section id="bag-or-boost" class="slide level2">
+<h2>Bag or boost?</h2>
+<ul>
+<li><p><strong>Bagging:</strong> a method where you combine the output of all weak learners (a consensus).</p></li>
+<li><p><strong>Boosting:</strong> fit a first weak model, then check what it got wrong. Then assign a stronger weight to these observations, and fit the model again. Repeat until you reach perfect prediction or reach a stopping rule.</p></li>
+</ul>
+
+<img data-src="images/bagvboost.jpg" class="r-stretch"></section>
+<section id="trying-random-forests-on-our-dataset" class="slide level2">
+<h2>Trying Random Forests on our dataset</h2>
+<p>We should use moar cores</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href=""></a>cores <span class="ot">&lt;-</span> parallel<span class="sc">::</span><span class="fu">detectCores</span>()</span>
+<span id="cb43-2"><a href=""></a>cores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 20</code></pre>
+</div>
+</div>
+</section>
+<section id="setting-up-the-model" class="slide level2">
+<h2>Setting up the model</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href=""></a>rf_mod <span class="ot">&lt;-</span> </span>
+<span id="cb45-2"><a href=""></a>  <span class="fu">rand_forest</span>(<span class="at">mtry =</span> <span class="fu">tune</span>(), <span class="at">trees =</span> <span class="fu">tune</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb45-3"><a href=""></a>  <span class="fu">set_engine</span>(<span class="st">"ranger"</span>, <span class="at">num.threads =</span> cores<span class="dv">-2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb45-4"><a href=""></a>  <span class="fu">set_mode</span>(<span class="st">"classification"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="creating-a-recipe" class="slide level2">
+<h2>Creating a recipe</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href=""></a>rf_recipe <span class="ot">&lt;-</span> </span>
+<span id="cb46-2"><a href=""></a>  <span class="fu">recipe</span>(children <span class="sc">~</span> ., <span class="at">data =</span> hotel_train) <span class="sc">%&gt;%</span> <span class="co"># model firmula</span></span>
+<span id="cb46-3"><a href=""></a>  <span class="fu">step_date</span>(arrival_date) <span class="sc">%&gt;%</span> <span class="co"># splits dates into y, m, d</span></span>
+<span id="cb46-4"><a href=""></a>  <span class="fu">step_holiday</span>(arrival_date, <span class="at">holidays =</span> holidays) <span class="sc">%&gt;%</span> <span class="co"># holiday dummy vars</span></span>
+<span id="cb46-5"><a href=""></a>  <span class="fu">step_rm</span>(arrival_date) <span class="co"># remove variables</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="creating-a-workflow-1" class="slide level2">
+<h2>Creating a workflow</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href=""></a>rf_workflow <span class="ot">&lt;-</span> </span>
+<span id="cb47-2"><a href=""></a>  <span class="fu">workflow</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb47-3"><a href=""></a>  <span class="fu">add_model</span>(rf_mod) <span class="sc">%&gt;%</span> </span>
+<span id="cb47-4"><a href=""></a>  <span class="fu">add_recipe</span>(rf_recipe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="creating-a-tuning-grid" class="slide level2">
+<h2>Creating a tuning grid</h2>
+<p>We should normally use much larger grids, this one is for efficiency</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href=""></a>rf_grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb48-2"><a href=""></a>      <span class="at">mtry =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>), </span>
+<span id="cb48-3"><a href=""></a>      <span class="at">trees =</span> <span class="fu">c</span>(<span class="dv">500</span>, <span class="dv">1000</span>, <span class="dv">5000</span>))</span>
+<span id="cb48-4"><a href=""></a></span>
+<span id="cb48-5"><a href=""></a>rf_grid</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  mtry trees
+1    3   500
+2    5   500
+3    7   500
+4    3  1000
+5    5  1000
+6    7  1000
+7    3  5000
+8    5  5000
+9    7  5000</code></pre>
+</div>
+</div>
+</section>
+<section id="training-again" class="slide level2">
+<h2>Training again</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href=""></a>rf_res <span class="ot">&lt;-</span> </span>
+<span id="cb50-2"><a href=""></a>  rf_workflow <span class="sc">%&gt;%</span> </span>
+<span id="cb50-3"><a href=""></a>  <span class="fu">tune_grid</span>(hotel_folds,</span>
+<span id="cb50-4"><a href=""></a>            <span class="at">grid =</span> rf_grid,</span>
+<span id="cb50-5"><a href=""></a>            <span class="at">control =</span> <span class="fu">control_grid</span>(<span class="at">save_pred =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb50-6"><a href=""></a>            <span class="at">metrics =</span> <span class="fu">metric_set</span>(roc_auc))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This <em>WILL</em> take some time!</p>
+</section>
+<section id="tuning-results" class="slide level2">
+<h2>Tuning results</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href=""></a>rf_res <span class="sc">%&gt;%</span> </span>
+<span id="cb51-2"><a href=""></a>  <span class="fu">show_best</span>(<span class="at">metric =</span> <span class="st">"roc_auc"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 8
+   mtry trees .metric .estimator  mean     n std_err .config             
+  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;               
+1     5  5000 roc_auc binary     0.916     3 0.00390 Preprocessor1_Model8
+2     5  1000 roc_auc binary     0.916     3 0.00379 Preprocessor1_Model5
+3     7  5000 roc_auc binary     0.916     3 0.00332 Preprocessor1_Model9
+4     7  1000 roc_auc binary     0.916     3 0.00358 Preprocessor1_Model6
+5     7   500 roc_auc binary     0.915     3 0.00338 Preprocessor1_Model3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href=""></a><span class="fu">autoplot</span>(rf_res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href=""></a>rf_best <span class="ot">&lt;-</span> </span>
+<span id="cb54-2"><a href=""></a>  rf_res <span class="sc">%&gt;%</span> </span>
+<span id="cb54-3"><a href=""></a>  <span class="fu">select_best</span>(<span class="at">metric =</span> <span class="st">"roc_auc"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<img data-src="ML_Iapetus_presentation_files/figure-revealjs/unnamed-chunk-24-1.png" width="960" class="r-stretch"></section>
+<section id="generate-data-for-the-auc-plot" class="slide level2">
+<h2>Generate data for the AUC plot</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href=""></a>rf_auc <span class="ot">&lt;-</span> </span>
+<span id="cb55-2"><a href=""></a>  rf_res <span class="sc">%&gt;%</span> </span>
+<span id="cb55-3"><a href=""></a>  <span class="fu">collect_predictions</span>(<span class="at">parameters =</span> rf_best) <span class="sc">%&gt;%</span> </span>
+<span id="cb55-4"><a href=""></a>  <span class="fu">roc_curve</span>(children, .pred_children) <span class="sc">%&gt;%</span> </span>
+<span id="cb55-5"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">model =</span> <span class="st">"Random Forest"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="plot-the-auc-for-both-models" class="slide level2">
+<h2>Plot the AUC for both models</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href=""></a><span class="fu">bind_rows</span>(rf_auc, lr_auc) <span class="sc">%&gt;%</span> </span>
+<span id="cb56-2"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">1</span> <span class="sc">-</span> specificity, <span class="at">y =</span> sensitivity, <span class="at">col =</span> model)) <span class="sc">+</span> </span>
+<span id="cb56-3"><a href=""></a>  <span class="fu">geom_path</span>(<span class="at">lwd =</span> <span class="fl">1.5</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb56-4"><a href=""></a>  <span class="fu">geom_abline</span>(<span class="at">lty =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb56-5"><a href=""></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span> </span>
+<span id="cb56-6"><a href=""></a>  <span class="fu">scale_color_viridis_d</span>(<span class="at">option =</span> <span class="st">"plasma"</span>, <span class="at">end =</span> .<span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="ML_Iapetus_presentation_files/figure-revealjs/unnamed-chunk-26-1.png" width="960" class="r-stretch"></section>
+<section id="lets-not-forget-testing" class="slide level2">
+<h2>Let’s not forget testing!</h2>
+<p>Validation and tuning gives us the best model for the <em>training</em> data. But we want to make sure our model <em>generalises</em> well and is not biased or overfits. Enter the <em>testing data</em>.</p>
+<p>The <code>tune</code> package has a satisfyingly-named function called <code>last_fit()</code> that will re-train the data using the best parameters, and then test it against the test data</p>
+</section>
+<section id="section-7" class="slide level2">
+<h2></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href=""></a><span class="co"># the last model</span></span>
+<span id="cb57-2"><a href=""></a>last_rf_mod <span class="ot">&lt;-</span> </span>
+<span id="cb57-3"><a href=""></a>  <span class="fu">rand_forest</span>(<span class="at">mtry =</span> <span class="dv">5</span>, <span class="at">trees =</span> <span class="dv">1000</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb57-4"><a href=""></a>  <span class="fu">set_engine</span>(<span class="st">"ranger"</span>, <span class="at">num.threads =</span> cores<span class="dv">-2</span>, <span class="at">importance =</span> <span class="st">"impurity"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb57-5"><a href=""></a>  <span class="fu">set_mode</span>(<span class="st">"classification"</span>)</span>
+<span id="cb57-6"><a href=""></a></span>
+<span id="cb57-7"><a href=""></a><span class="co"># the last workflow</span></span>
+<span id="cb57-8"><a href=""></a>last_rf_workflow <span class="ot">&lt;-</span> </span>
+<span id="cb57-9"><a href=""></a>  rf_workflow <span class="sc">%&gt;%</span> </span>
+<span id="cb57-10"><a href=""></a>  <span class="fu">update_model</span>(last_rf_mod)</span>
+<span id="cb57-11"><a href=""></a></span>
+<span id="cb57-12"><a href=""></a><span class="co"># the last fit</span></span>
+<span id="cb57-13"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">345</span>)</span>
+<span id="cb57-14"><a href=""></a>last_rf_fit <span class="ot">&lt;-</span> </span>
+<span id="cb57-15"><a href=""></a>  last_rf_workflow <span class="sc">%&gt;%</span> </span>
+<span id="cb57-16"><a href=""></a>  <span class="fu">last_fit</span>(data_split)</span>
+<span id="cb57-17"><a href=""></a></span>
+<span id="cb57-18"><a href=""></a>last_rf_fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Resampling results
+# Manual resampling 
+# A tibble: 1 × 6
+  splits                id             .metrics .notes   .predictions .workflow 
+  &lt;list&gt;                &lt;chr&gt;          &lt;list&gt;   &lt;list&gt;   &lt;list&gt;       &lt;list&gt;    
+1 &lt;split [37500/12500]&gt; train/test sp… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;     &lt;workflow&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="how-good-does-it-do" class="slide level2">
+<h2>How good does it do?</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href=""></a>last_rf_fit <span class="sc">%&gt;%</span> </span>
+<span id="cb59-2"><a href=""></a>  <span class="fu">collect_metrics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  .metric     .estimator .estimate .config             
+  &lt;chr&gt;       &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;               
+1 accuracy    binary        0.942  Preprocessor1_Model1
+2 roc_auc     binary        0.933  Preprocessor1_Model1
+3 brier_class binary        0.0438 Preprocessor1_Model1</code></pre>
+</div>
+</div>
+</section>
+<section id="we-can-be-kinda-explanatory" class="slide level2">
+<h2>We can be ‘kinda’ explanatory</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href=""></a><span class="fu">library</span>(vip)</span>
+<span id="cb61-2"><a href=""></a>last_rf_fit <span class="sc">%&gt;%</span> </span>
+<span id="cb61-3"><a href=""></a>  <span class="fu">extract_fit_parsnip</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb61-4"><a href=""></a>  <span class="fu">vip</span>(<span class="at">num_features =</span> <span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="ML_Iapetus_presentation_files/figure-revealjs/unnamed-chunk-29-1.png" width="960" class="r-stretch"></section></section>
+<section>
+<section id="where-to-from-here" class="title-slide slide level1 center">
+<h1>Where to from here?</h1>
+
+</section>
+<section id="where-to-from-here-1" class="slide level2">
+<h2>Where to from here</h2>
+<ul>
+<li>Read up on some common algorithms: Random Forests, GBM, XgBoost, Support Vector Machine</li>
+<li>Read up on performance metrics</li>
+<li>Read up on feature engineering</li>
+<li>Read up on Tuning strategies</li>
+<li>Read up on AutoML</li>
+<li>Follow some of the ‘Learn’ lessons on tidymodels.org</li>
+<li>Look at some ML competitions at <a href="https://www.kaggle.com/">Kaggle</a></li>
+<li>Machine learning is a <em>huge</em> field
+<ul>
+<li>Pick an <em>application</em></li>
+<li>Look at the literature using ML for that application</li>
+</ul></li>
+</ul>
+</section></section>
+<section id="questions" class="title-slide slide level1 center">
+<h1>Questions?</h1>
+<div class="quarto-auto-generated-content">
+<div class="footer footer-default">
+
+</div>
+</div>
+</section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="ML_Iapetus_presentation_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="ML_Iapetus_presentation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="ML_Iapetus_presentation_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="ML_Iapetus_presentation_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="ML_Iapetus_presentation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="ML_Iapetus_presentation_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="ML_Iapetus_presentation_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="ML_Iapetus_presentation_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="ML_Iapetus_presentation_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="ML_Iapetus_presentation_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': true,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 8.0e-2,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+
+    <script>
+
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+      // slide changes (different for each slide format).
+
+      (function () {
+
+        // dispatch for htmlwidgets
+
+        function fireSlideEnter() {
+
+          const event = window.document.createEvent("Event");
+
+          event.initEvent("slideenter", true, true);
+
+          window.document.dispatchEvent(event);
+
+        }
+
+    
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          fireSlideEnter();
+
+    
+
+          // dispatch for shiny
+
+          if (window.jQuery) {
+
+            if (previousSlide) {
+
+              window.jQuery(previousSlide).trigger("hidden");
+
+            }
+
+            if (currentSlide) {
+
+              window.jQuery(currentSlide).trigger("shown");
+
+            }
+
+          }
+
+        }
+
+    
+
+        // hookup for slidy
+
+        if (window.w3c_slidy) {
+
+          window.w3c_slidy.add_observer(function (slide_num) {
+
+            // slide_num starts at position 1
+
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+          });
+
+        }
+
+    
+
+      })();
+
+    </script>
+
+    
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>

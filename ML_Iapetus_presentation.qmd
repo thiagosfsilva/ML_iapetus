@@ -1,15 +1,25 @@
 ---
 title: "Intro to Machine Learning"
 author: "Thiago Silva"
-format: revealjs
+
+execute: 
+  echo: true
+  tidy: true
+  message: false
+  warning: false
+  cache: true
+
+format: 
+    revealjs:
+        smaller: true
+        theme: moon
+        center: false
+        show-slide-number: all
+        margin: 0.08
+
 ---
 
 # Introductions
-
-:::: {.columns}
-
-::: {.column width="60%"}
-contents...
 
 ## Who am I?
 
@@ -18,14 +28,701 @@ contents...
 - Senior Lecturer in Environmental Informatics
 - Have been researching the Amazon wetlands for 20+ years.
 - Passionate about plant and ecosystem function and technology
+
+# What is Machine Learning? {.r-fit-text}
+
+## Is ML just statistics? {.center}
+
+![](images/stats_ML_AI.png)
+
+## Is ML just statistics?
+
+What do we use statistics for?
+
+::: {.incremental}
+- Exploration
+- Confirmation
+- Prediction
 :::
 
-::: {.column width="40%"}
-contents...
+```{r loadpacks, echo=FALSE}
+library(ggplot2)
+library(GGally)
+library(tidyfit)
+library(randomForest)
+```
+
+
+## Is ML just statistics?
+
+What do we use statistics for?
+
+
+- Exploration
+- Confirmation
+- **Prediction**
+
+## {.center}
+
+::: {.r-fit-text}
+*Confidence* vs. *Accuracy*
 :::
 
-::::
+## Is this a good model?
 
-# What is Machine Learning?
+```{r goodbadmodel, echo=FALSE}
+set.seed(45)
+n <- 1000
+x <- runif(n,0,100)
+res <- rnorm(n,0,100)
+y <- 0.5 + 0.4 * x + res
 
-![]()
+df <- data.frame(x=x,y=y)
+
+m <- lm(y ~ x, data = df)
+
+summary(m)
+```
+##
+
+```{r plot goodbadmodel, echo=FALSE}
+ggplot(df,aes(x,y)) + geom_point() + geom_smooth(method='lm')
+```
+## 
+
+```{r obsvspred, echo=FALSE}
+df$pred <- predict(m)
+ggplot(df,aes(y,pred)) + geom_point() +
+    geom_smooth(method='lm',se=FALSE) +
+    xlab('Observed') + ylab('Predicted')
+```
+## Machine Learning vs. Statistics
+
+- It's all about good predictions
+- Forget p-values, confidence intervals, model assumptions
+- Forget (mostly) about **model interpretation**
+- Forget about the 'minimal' model and parsimony - use ALL the data
+- The best ML methods don't care about linearity, normality, collinearity, etc.
+- Many good statistical methods (e.g. linear models) are bad ML approaches
+
+## Example: Boston Housing Price
+
+```{r BHPload, echo=FALSE}
+data <- MASS::Boston
+str(data)
+```
+
+## Linear Regression vs Random Forests
+
+```{r lmvsrf, echo=FALSE}
+# For reproducibility
+set.seed(128)
+ix_tst <- sample(1:nrow(data), round(nrow(data)*0.1))
+
+data_trn <- data[-ix_tst,]
+data_tst <- data[ix_tst,]
+
+model_frame <- data_trn %>% 
+  regress(medv ~ .,
+          OLS = m("lm"),
+          RF = m("rf")
+          )
+
+model_frame %>% 
+  # Generate predictions
+  predict(data_tst) %>% 
+  # Calculate RMSE
+  yardstick::rmse(truth, prediction)
+```
+# ML Concepts
+
+## Terminology
+
+![](images/ML_levels.svg)
+
+## Terminology
+
+- **Training:** calculating model parameters from data. 
+- **Tuning:** optimizing model *hyperparameters*  for best prediction.
+- **Validating:** evaluation while tuning.
+- **Testing:** final evaluation of the resulting model.
+- **Outcome:** our dependent variable
+- **Feature:** our predictor variables
+
+## Terminology
+
+- **Classification:** any problem/model that outputs *categorical* data.
+    - In ML, logistic *regression*  is a  *classification**  algorithm
+- **Regression:** any problem/model that outputs *continuous* data
+
+When dealing with images:
+
+![](images/segvsclasvsdecjpg.jpg)
+
+# Machine Learning resources
+
+## What programming language?
+
+**R:** 
+
+- A 'smaller', more domain specific language (21,686 pkgs on CRAN).
+- You probably already know it.
+- Very good for statistical data analysis too.
+- Not very good to learn good programming habits and concepts.
+- Easier to install, set up and get going.
+
+**Python:**
+
+- A much 'bigger', general purpose language (530,000 pkgs on PIP).
+- Not too different from R, but will fill 'clunky' at first.
+- Will teach you more about good programming habits and concepts.
+- *The* language used by the people *developing* ML.
+- Good for many other uses.
+
+## Machine Learning Resources {.r-fit-text}
+
+**R:**
+
+- `caret`: named from the estimation symbol ($\hat{}$), the 'old school' 
+- `tidymodels`: the 'tidyverse' way, actively developed
+
+**Python:**
+
+- `scikit-learn`: the "holy grail" of ML
+- `pytorch` and `tensorflow`: the "big two" for deep learning
+
+## Machine Learning Resources {.r-fit-text}
+
+Where to start?
+
+- The `tidymodels` [website](https://www.tidymodels.org/) and the 'Tidy Models with R' [e-book](https://www.tmwr.org/).
+- The older `Applied Predictive Modeling` [book](https://link.springer.com/book/10.1007/978-1-4614-6849-3) is still better for *understanding* ML
+- The [Scikit-learn website](https://scikit-learn.org/stable/) is excellent for learning about specific algorithms, regardless of programming language.
+
+# ML by example
+
+## Getting ready
+
+For this session, install the following packages:
+
+`tidyverse`,`tidymodels`, `modeldata`, `glmnet`, `parallel`, `ranger`, `vip`
+
+I am assuming you are using R version 4.4.2.
+
+## Basic regression in `tidymodels`
+
+The sea urchins dataset explores how three different feeding regimes affect the size of sea urchins over time. We wand to predict suture `width` from `initial_volume` (continuous) and `food_regime` (categoricaL).
+
+```{r urdata}
+library(tidyverse)
+library(tidymodels)
+
+urchins <- 
+  read_csv("https://tidymodels.org/start/models/urchins.csv") %>%
+  setNames(c("food_regime", "initial_volume", "width")) %>%
+  mutate(food_regime = factor(food_regime, levels = c("Initial", "Low", "High")))
+
+glimpse(urchins)
+```
+##
+
+```{r}
+ggplot(urchins,aes(initial_volume, width, colour = food_regime)) + 
+  geom_point() + 
+  geom_smooth(method = lm, se = FALSE)
+```
+
+## The traditional way
+
+```{r}
+mod <- lm(width ~ initial_volume * food_regime, data = urchins)
+summary (mod)
+
+```
+## The ML/Tidymodels way
+
+1) We most likely want to try different *algorithms*, so we want a unified interface for trying them. This is given the by `parnsip` package. 
+
+
+    - For a linear model, we have `linear_reg()`
+
+
+2) Different algorithms may have use differen *engines* (estimation methods/implementations/packages)
+
+
+    - Some available engines for `linear_reg()` are `lm`, `glm`,`gls`,`lme`, etc...
+
+
+3) Then we want to *fit* (i.e. train) the model 
+
+
+    - `parsnip` gives us the `fit()` function
+
+## 
+
+```{r}
+# Set up the model type and engine
+lin_mod <- linear_reg() %>% set_engine ('glm')
+
+# Fit the model 
+lin_fit <- lin_mod %>% fit(width ~ initial_volume * food_regime,
+                           data = urchins,
+                           family='gaussian')
+
+# From the broom pkg
+tidy(lin_fit) 
+  
+```
+## ML Workflow
+
+The ML workflow involves more steps than the usual statistical analysis:
+
+![](images/data-preparation-workflow.png)
+
+## ML by example: Hotel Bookings
+
+Let’s use hotel bookings data to predict which hotel stays included children and/or babies, based on characteristics such as which hotel the guests stay at, how much they pay, etc.
+
+## Reading in the data
+```{r}
+hotels <- 
+  read_csv("https://tidymodels.org/start/case-study/hotels.csv") %>%
+  mutate(across(where(is.character), as.factor))
+
+glimpse(hotels)
+```
+## Data exploration
+
+```{r}
+# Do we have missing data?
+hotels %>% tally()
+hotels %>% na.omit() %>% tally()
+
+# What does the outcome variable look like?
+hotels %>% 
+  count(children) %>% 
+  mutate(prop = n/sum(n))
+
+```
+
+## Data exploration
+
+**Problem - Class imbalance:** severe class imbalance can bias model results. 
+
+*Possible Solutions:* upsample or downsample data.
+
+## Data splitting
+
+One of the fundamental concepts in ML is that we **ALWAYS** split our data into *training* and *testing*.
+
+- We want the largest possible number of observations to train
+- We want enough samples to test with robustness
+
+Usually data splits are between 70/30 to 90/10, with 80/20 being most common
+
+## How do we split?
+
+- We want it to be random
+- But we may want to account for *structures* in the data
+  - Geographical data
+  - Grouped data
+  - Imbalanced data
+
+The `rsample` package from `tidymodels` deals with sampling
+
+## Splitting our data 75/25
+
+```{r}
+set.seed(45)
+
+# Stratified sampling by the children variable to keep proportions
+data_split <- initial_split(hotels, prop = 3/4, strata = children)
+
+hotel_train <- training(data_split)
+hotel_test <- testing(data_split)
+
+print(c(nrow(hotels),nrow(hotel_train),nrow(hotel_test)))
+
+hotel_train %>% 
+  count(children) %>% 
+  mutate(prop = n/sum(n))
+
+hotel_test %>% 
+  count(children) %>% 
+  mutate(prop = n/sum(n))
+```
+## Feature preprocessing and engineering 
+
+- Changing variables to fit algorithms (e.g. dummy variables)
+- Normalizing (scaling and centering) always recommended
+- Transforming variables
+- Combining/Splitting Variables
+
+The `recipes` package lets us organise these as a reusable 'recipes'. The `step_` functions have several common preprocessing steps implemented.
+
+##
+
+```{r}
+holidays <- c("AllSouls", "AshWednesday", "ChristmasEve", "Easter", 
+              "ChristmasDay", "GoodFriday", "NewYearsDay", "PalmSunday")
+
+lr_recipe <- 
+  recipe(children ~ ., data = hotel_train) %>% # model firmula
+  step_date(arrival_date) %>% # splits dates into y, m, d
+  step_holiday(arrival_date, holidays = holidays) %>% # holiday dummy vars
+  step_rm(arrival_date) %>% # remove variables
+  step_dummy(all_nominal_predictors()) %>%  # encodes chr or fct to dummies
+  step_zv(all_predictors()) %>% # remove variables with zero variance
+  step_normalize(all_predictors()) # centers and scales
+```
+
+## Picking an algorithm
+
+We have a binary outcome (*classification* problem), so logistic regression might work?
+
+- Penalised Logistic Regression from `glmnet` package
+
+```{r}
+# Set up the model
+# tune() indicates this parameters should be tuned
+lr_mod <- 
+  logistic_reg(penalty = tune(), mixture = 1) %>% 
+  set_engine("glmnet")
+```
+## Creating a workflow
+
+The `workflow` package is used to tie in the different modeling steps
+
+```{r}
+lr_workflow <- 
+  workflow() %>% 
+  add_model(lr_mod) %>% 
+  add_recipe(lr_recipe)
+```
+## Model tuning
+
+- Most ML algorithms will have *hyperparameters*: parameters that are not learned from data, but that will change the outcome of the modelling
+
+- Stepwise regression is a crude example of hyperparameter tuning ('nvar' would be the hyperparameter)
+
+- Since they can be *learned*, they must be *tuned*
+
+- To tune a hyperparameter we set a range of values/combinations, then *validate* each combination
+
+## Validation sets and strategies
+
+- To validate, we must split our data *again*!
+- Different validation strategies:
+  - Single validation split
+  - *k-fold* or *v-fold* cross-validation
+  - Leave-one-out cross-validation (LOOCV)
+
+## Cross-validation
+
+![](images/5-fold-cross-validation_SIMPLE-EXAMPLE_v2.png)  
+##
+
+```{r}
+# Create three folds
+set.seed(234)
+hotel_folds <- vfold_cv(hotel_train,v=3,strata= children)
+
+hotel_folds
+```
+
+## The tuning grid
+
+- We want to test a range of values for each hyperparameter
+- We want to test all possible combinations for multiple hyperparameters
+- Numbers can can *explode* very fast
+
+The `dials` package of `tidymodels` will deal with setting tuning parameters
+
+## 
+
+```{r}
+# Create a regular sequence for the penalty parameter
+lr_reg_grid <- tibble(penalty = 10^seq(-4, -1, length.out = 30))
+nrow(lr_reg_grid)
+head(lr_reg_grid)
+```
+## How good is my model?
+
+Tuning (and testing) will always rely on some measure of model *performance*:how well does the model do? That mainly involes *accuracy*, but also other apsects such as bias.
+
+There are several accuracy *metrics* for both classification and regression *performance*:
+
+- **Classification accuracy metrics:** global accuracy, kappa, recall, precision, sensitivity, specificity, AUC, etc.
+
+- **Regression metrics:** RMSE, R-squared, MAE, etc.
+
+The `yardstick` package of `tidymodels` deals with measuring model performance.
+
+## Time to crunch some data!
+
+We can now train and tune our model! The `tune` package handles that.
+
+```{r}
+lr_res <- 
+  lr_workflow %>% 
+  tune_grid(resamples = hotel_folds, # validation data
+            grid = lr_reg_grid,# hyperparameter values
+            control = control_grid(save_pred = TRUE), # save the cval results
+            metrics = metric_set(roc_auc)) # which performance metric to use
+```
+
+## Did it work?
+
+Checking the tuning results.
+
+```{r}
+lr_perf <- lr_res %>% collect_metrics() 
+
+lr_perf
+```
+
+## Visualising tuning results
+
+Important: AUC=0.5 is a completely random prediction.
+
+```{r}
+lr_perf %>% 
+  ggplot(aes(x = penalty, y = mean)) + 
+  geom_point() + 
+  geom_line() + 
+  ylab("Area under the ROC Curve") +
+  scale_x_log10(labels = scales::label_number())
+```
+
+## What would be the best parameters?
+
+```{r}
+top_models <-
+  lr_res %>% 
+  show_best(metric = "roc_auc", n = 15) %>% 
+  arrange(desc(mean)) 
+top_models
+```
+## So which is best?
+
+```{r}
+lr_best <- lr_res %>% select_best(metric = 'roc_auc')
+
+lr_best
+
+```
+
+```{r}
+lr_auc <- 
+  lr_res %>% 
+  collect_predictions(parameters = lr_best) %>% 
+  roc_curve(children, .pred_children) %>% 
+  mutate(model = "Logistic Regression")
+
+autoplot(lr_auc)
+```
+
+## What about a second algorithm?
+
+We often want to test multiple ML algorithms to find the best performing one.
+
+Let us try the famous *random Forests* algorithm.
+
+## Decision Trees
+
+A very simple but powerful classification/regression method
+
+- Take one feature
+- Find the feature value that best splits the data into the desired classes
+- Repeat for all features
+- Pick the best fetaure and split value
+- Repeat recursively until all classes are isolated
+
+## Decision Trees
+
+![](images/Buying-a-Car.png)
+
+## But...
+
+- Could there be multiple 'best' solutions?
+
+- Enter the Random Forests algorithm
+
+## Why *Random*?
+
+- For each node, randomly pick a subset of the available features to learn from
+- This tree will be a *weak* learner
+
+This is the *mtry* hyperparameter
+
+## Why *Forests*?
+
+- What if we create *many* trees (a forest)
+- Due to randomness, each tree will; be different
+
+This is the *ntree* hyperparameter
+
+![](images/rf.png)
+
+## And then what?
+
+- Combine the predictions of all weak trees to generate a *strong* consensus
+- This know as an *ensemble learning* method
+- How do we reach the consensus?
+- Bagging or Boosting
+
+## Bag or boost?
+
+- **Bagging:** a method where you combine the output of all weak learners (a consensus).
+
+- **Boosting:** fit a first weak model, then check what it got wrong. Then assign a stronger weight to these observations, and fit the model again. Repeat until you reach perfect prediction or reach a stopping rule.
+
+![](images/bagvboost.jpg)
+
+## Trying Random Forests on our dataset
+
+We should use moar cores
+
+```{r}
+cores <- parallel::detectCores()
+cores
+```
+## Setting up the model
+
+```{r}
+rf_mod <- 
+  rand_forest(mtry = tune(), trees = tune()) %>% 
+  set_engine("ranger", num.threads = cores-2) %>% 
+  set_mode("classification")
+```
+## Creating a recipe
+
+```{r}
+rf_recipe <- 
+  recipe(children ~ ., data = hotel_train) %>% # model firmula
+  step_date(arrival_date) %>% # splits dates into y, m, d
+  step_holiday(arrival_date, holidays = holidays) %>% # holiday dummy vars
+  step_rm(arrival_date) # remove variables
+```
+## Creating a workflow
+
+```{r}
+rf_workflow <- 
+  workflow() %>% 
+  add_model(rf_mod) %>% 
+  add_recipe(rf_recipe)
+```
+## Creating a tuning grid
+
+We should normally use much larger grids, this one is for efficiency
+```{r}
+rf_grid <- expand.grid(
+      mtry = c(3, 5, 7), 
+      trees = c(500, 1000, 5000))
+
+rf_grid
+```
+## Training again
+
+```{r}
+rf_res <- 
+  rf_workflow %>% 
+  tune_grid(hotel_folds,
+            grid = rf_grid,
+            control = control_grid(save_pred = TRUE),
+            metrics = metric_set(roc_auc))
+```
+This *WILL* take some time!
+
+## Tuning results
+
+```{r}
+rf_res %>% 
+  show_best(metric = "roc_auc")
+
+autoplot(rf_res)
+
+rf_best <- 
+  rf_res %>% 
+  select_best(metric = "roc_auc")
+```
+
+## Generate data for the AUC plot
+
+```{r}
+rf_auc <- 
+  rf_res %>% 
+  collect_predictions(parameters = rf_best) %>% 
+  roc_curve(children, .pred_children) %>% 
+  mutate(model = "Random Forest")
+```
+
+## Plot the AUC for both models
+```{r}
+bind_rows(rf_auc, lr_auc) %>% 
+  ggplot(aes(x = 1 - specificity, y = sensitivity, col = model)) + 
+  geom_path(lwd = 1.5, alpha = 0.8) +
+  geom_abline(lty = 3) + 
+  coord_equal() + 
+  scale_color_viridis_d(option = "plasma", end = .6)
+```
+
+## Let's not forget testing!
+
+Validation and tuning gives us the best model for the *training* data. But we want to make sure our model *generalises* well and is not biased or overfits. Enter the *testing data*.
+
+The `tune` package has a satisfyingly-named function called `last_fit()` that will re-train the data using the best parameters, and then test it against the test data
+
+## 
+
+```{r}
+# the last model
+last_rf_mod <- 
+  rand_forest(mtry = 5, trees = 1000) %>% 
+  set_engine("ranger", num.threads = cores-2, importance = "impurity") %>% 
+  set_mode("classification")
+
+# the last workflow
+last_rf_workflow <- 
+  rf_workflow %>% 
+  update_model(last_rf_mod)
+
+# the last fit
+set.seed(345)
+last_rf_fit <- 
+  last_rf_workflow %>% 
+  last_fit(data_split)
+
+last_rf_fit
+```
+## How good does it do?
+
+```{r}
+last_rf_fit %>% 
+  collect_metrics()
+```
+
+## We can be 'kinda' explanatory
+```{r}
+library(vip)
+last_rf_fit %>% 
+  extract_fit_parsnip() %>% 
+  vip(num_features = 20)
+```
+
+# Where to from here?
+
+## Where to from here
+
+- Read up on some common algorithms: Random Forests, GBM, XgBoost, Support Vector Machine
+- Read up on performance metrics
+- Read up on feature engineering
+- Read up on Tuning strategies
+- Read up on AutoML
+- Follow some of the 'Learn' lessons on tidymodels.org 
+- Look at some ML competitions at [Kaggle](https://www.kaggle.com/)
+- Machine learning is a *huge* field 
+  - Pick an *application*
+  - Look at the literature using ML for that application
+  
+# Questions?
